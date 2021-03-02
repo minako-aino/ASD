@@ -41,12 +41,13 @@ def quick_sort(nums):
 
     _quick_sort(nums, 0, len(nums) - 1)
 
-list = fill_in(100000)
-#print(list)
-
-copies = 0
-comparisons = 0 
-start_time = time.time() 
-quick_sort(list)
-print(f"{(time.time() - start_time)} s")
-print(copies, comparisons) 
+quantities = [100, 1000, 10000]
+for N in quantities: 
+    list = fill_in(N)
+    copies = 0
+    comparisons = 0 
+    start_time = time.time() 
+    quick_sort(list)
+    print(f"{round((time.time() - start_time), 5)} s")
+    print(copies, comparisons)
+    print(list) 
