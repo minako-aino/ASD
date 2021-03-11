@@ -26,7 +26,6 @@ def partition(nums, low, high):
         if i >= j:
             return j
         
-        # if the left elemnt greater, than right, swap them
         copies += 2
         nums[i], nums[j] = nums[j], nums[i]
 
