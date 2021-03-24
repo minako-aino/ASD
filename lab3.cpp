@@ -27,7 +27,8 @@ class List {
      void Add_h(string x);
 	 void Insert(int position); 
      void Del(int x);
-	 void Lab_task(List* lst);                  
+	 void Lab_task(List* lst);
+	 int List_size(List* lst);                  
  };
 
 // destructor
@@ -274,11 +275,18 @@ void tasks(char answ, List lst){
 			lst.Show();
 			break;}
 	}
-	cout << "Wanna something else?";
-	cin >> ans;
-	if (ans == 'y' || ans == 'Y'){
-		tasks(answ, lst);
-	}
+}
+
+// check the memory used
+int List::List_size(List* lst) {
+    Word* current = Head;
+    int size = 0;
+    while (current != NULL)
+    {
+        size = size + sizeof(current->text) + sizeof(current->Next) + sizeof(current->Prev);
+        current = current->Next;
+    }
+    return size;
 }
 
 //main for the first method
@@ -291,6 +299,7 @@ void main_1(){
 	
 	List lst; //creating new list
 	
+	unsigned int start_time =  clock();
 	cout << "Do you want to create a list?\n";
 	cin >> answ;
 	if (answ == 'y' || answ == 'Y'){
@@ -301,10 +310,15 @@ void main_1(){
 			cin >> value;
 			lst.Add_c(value);
 		}
-		cout << lst.size;
+		cout << "List size: " << lst.size << endl;
     	cout << "What do you want to do with your list?\n";
     	cin >> answ;
 		tasks(answ, lst);
+		int final = lst.List_size(&lst);
+		cout << "Used memory size is: " << final << endl;
+		unsigned int end_time = clock(); 
+    	unsigned int search_time = end_time - start_time;
+    	cout << "Time: " << search_time/1000.0 << " s" << endl;
 	} else {
 		cout << "OK\n";
 	}
@@ -326,6 +340,7 @@ string * create_array(int size){
 void lab_task(string* arr, int size){
 	int res = 0;
 	
+	cout << "\nResult:" << endl;
 	for (int i = 1; i < size; i++) {
 		if (int result = arr[i].compare(arr[0]) != 0 ){
 			res++;
@@ -337,14 +352,14 @@ void lab_task(string* arr, int size){
 					arr[i].erase(arr[i].size() - 1);
 				}
 			}
-		cout << arr[i];
+		cout << arr[i] << endl;
 		}
 	}
 	
 	if(res == 0) {
 		cout << "Empty\n";
 	} else if (res < 2) {
-		cout << "There are less than 2 mismatches";
+		cout << "\nThere are less than 2 mismatches";
 	}
 }
 
@@ -358,13 +373,19 @@ int main_2() {
 		cout << "Enter size of your array: ";
     	cin >> size;
 		string * arr = create_array(size);
-    	
+		
 		lab_task(arr, size);
     	// print
-    	cout << "Array:\n";
+    	cout << "\nArray:\n";
 		for (int i = 0; i < size; i++) {
-			cout << arr[i]<<endl;
+			cout << arr[i] << endl;
 		}
+		
+		int full = 0;
+    	for (int i = 0; i < size ; i++){
+			full = full + arr[i].size();
+		}
+    	cout << "\nThe size of memory used: " << full << endl; 
     	
 		// clean memory
     	delete [] arr;
