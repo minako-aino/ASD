@@ -11,7 +11,7 @@ char answ;
 // chain link
 struct Word {
      string text;
-	 int size;                        
+	int size;                        
      Word *Next, *Prev;                 
  };
 
@@ -28,13 +28,13 @@ class List {
 	 void Insert(int position); 
      void Del(int x);
 	 void Lab_task(List* lst);
+	 void change_Prev(int index);
 	 int List_size(List* lst);                  
  };
 
 // destructor
 List::~List() {
-     while (Head)                       
-     {
+     while (Head) {
          Tail = Head->Next;             
          delete Head;                   
          Head = Tail;                   
@@ -69,7 +69,7 @@ void List::Add_c(string x) {
 }
 
 // adding the first el.
-void List::Add_h(string x){
+void List::Add_h(string x) {
    Word * temp = new Word;
    // no prev
    temp->Prev = 0;
@@ -247,6 +247,21 @@ void List::Lab_task(List* lst) {
 	}
 }
 
+// additional task
+void List::change_Prev(int index){
+	// we can`t change previous to the first element
+	if ((index == 1) and (Head->Next)){
+        	cout << "There are no elements!\n";
+	} else {
+		// begin with the head
+		Word * current = Head;
+		// looking for the needed element
+		for (int i=0; i<index-2; i++) current = current->Next;
+		// change it
+		current->text = current->Next->text;
+	}
+}
+
 void tasks(char answ, List lst){
 	int quantity;
     int position;
@@ -273,7 +288,13 @@ void tasks(char answ, List lst){
 			cin >> x;
 			lst.Del(x);
 			lst.Show();
-			break;}
+			break; }
+		case '5':{
+			cout << "Which one?\n";
+			cin >> x;
+			lst.change_Prev(x);
+			lst.Show();
+			break; }
 	}
 }
 
@@ -381,13 +402,13 @@ int main_2() {
 			cout << arr[i] << endl;
 		}
 		
-		int full = 0;
+	int full = 0;
     	for (int i = 0; i < size ; i++){
 			full = full + arr[i].size();
 		}
     	cout << "\nThe size of memory used: " << full << endl; 
     	
-		// clean memory
+	// clean memory
     	delete [] arr;
 	} else {
 		cout << "OK";
@@ -409,7 +430,7 @@ int main () {
     		cout << "Time: " << search_time/1000.0 << " s" << endl;
 			break;
 		}
-		case '2': {
+	case '2': {
     		unsigned int start_time =  clock(); 
    			main_2();
     		unsigned int end_time = clock(); 
