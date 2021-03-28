@@ -18,29 +18,18 @@ struct Word {
 // creating our list
 class List {
      Word *Head, *Tail;
-	int size;
  public:
      List():Head(NULL),Tail(NULL){};    
      ~List();
-	int getSize();
-	void setSize(int s);
+	 int size = 0;                           
      void Show();                       
      void Add_c(string x);
      void Add_h(string x);
 	 void Insert(int position); 
      void Del(int x);
-	void changePrev(int index);
 	 void Lab_task(List* lst);
 	 int List_size(List* lst);                  
  };
-
-int List::getSize(){
-	return size;
-}
-
-void List::setSize(int s){
-	size = s;
-}
 
 // destructor
 List::~List() {
@@ -221,16 +210,6 @@ void List::Del(int x){
 	// delete the address of the beginning of the deleted element               
     delete temp;      
 	size--;                     
-}
-
-void List::changePrev(int index){
-	if ((index == 1) and (Head->Next)){
-        	cout << "There are no elements!\n";
-	} else {
-		Word * current = Head;
-		for (int i=0; i<index-2; i++) current = current->Next;
-		current->text = current->Next->text;
-	}
 }
 
 // just task from lab:)
