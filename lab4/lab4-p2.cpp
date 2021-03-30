@@ -96,7 +96,7 @@ void Queue::delete_el(){
     delete curNode;		                                   
 }
 
-int main_1() {
+int main_2() {
     Queue Q;
     Q.size_set(0);
     char number;
