@@ -3,7 +3,8 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
- 
+#include <algorithm>
+
 using namespace std;
  
 string * add_el(string *arr, int size) {
@@ -20,13 +21,13 @@ string * add_el(string *arr, int size) {
     cin >> value;
     // add new element
     tmp[size] = value; 
-    // clean memeory
+    // clean memory
     
 	delete[] arr;
 	return tmp;
 } 
  
-int main_1() {
+int main() {
     int size;
     int answ;
 	char ch;
@@ -47,13 +48,21 @@ int main_1() {
 				for (int i = 0 ; i < size; i++) cout << arr[i] << "\n";
 				break; }
 			case 2: {
-				int tmp;
+				//rotate(&arr[0], &arr[1], &arr[size-1]);
+				
+ 				const string temp = arr[0];
+ 				for(int i = 1; i < size; i++) arr[i-1] = arr[i];
+ 				arr[size-1] = temp;
+				for (int i = 0 ; i < size ; i++) cout << arr[i] << "\n";
+				break;
+				
+				/*int tmp;
 				s = arr[0];
 				tmp = size-1;               
         		for (int i=0; i < tmp; i++) arr[i]=arr[i+1];
         		arr[tmp] = s;
         		for (int i = 0 ; i < size ; i++) cout << arr[i] << "\n";
-				break;
+				break;*/
 			}
 			case 3:{
 				arr = add_el(arr, size);
