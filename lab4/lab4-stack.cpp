@@ -8,16 +8,14 @@ void push(char *_stack, int &_ptr, char data) {
 }
 
 char pop(char *_stack, int &_ptr) {
-	return _stack[--_ptr];
+	if (sizeof(_stack) == 0) {
+		cout << "It is empty\n";
+	} else return _stack[--_ptr];
 }
-
-void push(char *_stack, int &_ptr, char data);
-char pop(char *_stack, int &_ptr);
 
 void PostfixNotation(const char *_infix, char *_postfix) {
 	// stack for operators
-	char stack[100];
-	// head of stack	
+	char stack[100];	
 	int st_ptr = 0;
 	
 	// index in output string
@@ -26,7 +24,7 @@ void PostfixNotation(const char *_infix, char *_postfix) {
 	int in_index = 0;
 
 	do {
-		// the current symbol in oue string
+		// the current symbol in our string
 		char current = _infix[in_index];
 
 		switch (current) {
@@ -58,7 +56,7 @@ void PostfixNotation(const char *_infix, char *_postfix) {
 						cout << "Add * or / to the output\n";
 						_postfix[out_index++] = op;	
 						cout << "Delete * or / from stack\n";
-						pop(stack, st_ptr);			// ??????? ???????? ?? ?????
+						pop(stack, st_ptr);		
 					}
 					else
 						break;
